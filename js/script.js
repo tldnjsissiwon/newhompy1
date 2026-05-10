@@ -237,8 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
         await ensureAllPostsLoaded(); // 모든 게시물 데이터가 로드되었는지 확인
         // 모든 게시물에서 고유한 태그들을 추출하고 정렬합니다. (빈 값은 제외)
         const uniqueTags = [...new Set(allAvailablePosts.map(p => p.tag).filter(Boolean))].sort();
-        // 'All Tags' 옵션을 기본으로 설정
-        tagFilterSelect.innerHTML = '<option value="all">All Tags</option>';
+        // '부산물' 옵션을 기본으로 설정
+        tagFilterSelect.innerHTML = '<option value="all">부산물</option>';
         // 각 고유 태그에 대한 옵션을 드롭다운에 추가합니다.
         uniqueTags.forEach(tag => {
             tagFilterSelect.innerHTML += `<option value="${tag}">${tag}</option>`;
