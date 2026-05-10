@@ -2,7 +2,7 @@
 
 // 이 URL은 Google Apps Script의 배포 URL입니다.
 // 게시물 목록과 방명록 기능을 사용하려면 이 값을 자신의 Apps Script URL로 변경해야 합니다.
-export const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8BlxzyxNhIMnD-FM_4pAzNJhFeD3N4P6A1GPDEyvCNJ-Q1wP3pD0MZLXirVgOklTt7w/exec'; // IMPROVEMENT: 중앙 집중화된 Apps Script URL
+export const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwaULahiqs7KBBf2I5T7984QZZRlDf2QQ3HmTEuhdHU0Ufsqi-92QurGkMW7dpZnrvWzA/exec'; // IMPROVEMENT: 중앙 집중화된 Apps Script URL
 const LIKED_POSTS_STORAGE_KEY = 'myWebsiteLikedPosts'; // 좋아요 누른 게시물 ID를 저장할 로컬 스토리지 키
 
 /**
