@@ -177,7 +177,7 @@
 }
 
 #send-message-button:hover{
-    /* 호버 시 스타일 추가 */
+background-color: #FFEAEA /* 호버 시 스타일 추가 */
 }
 
 /* --- 사용자별 색상 (User-specific Colors) --- */
