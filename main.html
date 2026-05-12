@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Background HTML</title>
+    <style>
+        /* CSS for the video background */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            position: relative; /* Needed for z-index of content */
+            z-index: 1; /* Ensures content is above the video */
+            color: white; /* Example text color for content */
+            text-align: center;
+            height: 100vh !important; /* Ensure body takes full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Prevent body scroll if video overfills */
+        }
+
+        .video-background {
+            position: fixed; /* Fixes the video to the viewport */
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0; /* Makes the div cover the entire screen */
+            overflow: hidden; /* Hides any overflowing parts of the video */
+            z-index: -99; /* Places it behind all other content, from CodePen */
+            width: 100% !important; /* Retaining your !important */
+            height: 100% !important; /* Retaining your !important */
+        }
+
+        /* This wrapper helps in managing the video's aspect ratio and positioning */
+        .video-foreground {
+            position: absolute; /* Positions relative to .video-background */
+            top: 0;
+            left: 0;
+            width: 100%; /* Initial fill of its parent */
+            height: 100%; /* Initial fill of its parent */
+            /* pointer-events: none; /* Removed to allow interaction if needed, but keep if content should pass through */
+        }
+
+        .video-background video { /* Changed from iframe to video */
+            position: absolute; /* Positions relative to .video-foreground */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            min-width: 100%; /* Ensure it covers the width */
+            min-height: 100%; /* Ensure it covers the height */
+            width: auto; /* Auto width */
+            height: auto; /* Auto height */
+            transform: translate(-50%, -50%); /* Adjust position to truly center */
+            pointer-events: none; /* Allows clicks to pass through to elements below */
+        }
+
+        /* Media Queries for Aspect Ratio Handling (from CodePen) - Adjusted for video tag */
+        @media (min-aspect-ratio: 16/9) { /* If screen is wider than 16:9 */
+            .video-background video {
+                height: 100%; /* Fill height */
+                width: auto; /* Auto width */
+            }
+        }
+
+        @media (max-aspect-ratio: 16/9) { /* If screen is taller than 16:9 */
+            .video-background video {
+                width: 100%; /* Fill width */
+                height: auto; /* Auto height */
+            }
+        }
+
+        /* Styles for the sound toggle button */
+        .sound-toggle-button {
+            position: fixed; /* 화면에 고정 */
+            bottom: 20px; /* 하단에서 20px 위 */
+            right: 20px; /* 오른쪽에서 20px 안쪽 */
+            background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
+            color: white; /* 흰색 텍스트 */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1rem;
+            z-index: 100; /* 다른 콘텐츠 위에 표시 */
+            transition: background-color 0.3s ease;
+        }
+
+        .sound-toggle-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-background">
+        <!-- muted 속성 제거 -->
+        <video autoplay loop playsinline id="backgroundVideo" class="video-foreground">
+            <source src="videos/effie.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- 소리 켜기/끄기 버튼 -->
+    <button id="soundToggleButton" class="sound-toggle-button">
+        소리 켜기
+    </button>
+
+    <script>
+        const video = document.getElementById('backgroundVideo');
+        const soundToggleButton = document.getElementById('soundToggleButton');
+
+        // 페이지 로드 시 영상이 음소거 상태로 시작하도록 설정
+        // (브라우저 정책 때문에 muted를 유지하는 것이 자동 재생에 유리)
+        video.muted = true;
+        soundToggleButton.textContent = 'play';
+
+        soundToggleButton.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false; // 음소거 해제
+                soundToggleButton.textContent = 'mute';
+                // 사용자가 소리를 켰으므로, 필요하다면 재생 시작
+                video.play().catch(error => {
+                    console.log("Video play failed after unmute:", error);
+                    // 자동 재생이 막혔을 경우 사용자에게 재생 버튼을 보여주는 등의 처리
+                });
+            } else {
+                video.muted = true; // 음소거
+                soundToggleButton.textContent = 'play';
+            }
+        });
+
+        // 사용자가 처음 페이지에 들어왔을 때 소리 버튼을 누르기 전까지는
+        // 브라우저 정책에 따라 영상이 자동 재생되지 않을 수 있습니다.
+        // 이를 해결하기 위해 초기에는 muted로 시작하고, 버튼 클릭 시 unmute하는 방식이 가장 일반적입니다.
+    </script>
+
+</body>
+</html>
