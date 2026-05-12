@@ -27,7 +27,7 @@
     
     /* 색상 팔레트 */
     --color-primary: rgb(205, 255, 126);   /* 주요 강조 색상 (노랑) */
-    --color-link: rgb(255, 0, 0);       /* 링크 색상 (파랑) */
+    --color-link: #FF7676;       /* 링크 색상 (파랑) */
     --color-text-primary: rgb(0, 0, 0);   /* 기본 텍스트 색상 (검정) */
     --color-background-light: rgb(241, 241, 241); /* 밝은 배경색 (회색) */
     
