@@ -242,16 +242,18 @@ document.addEventListener('DOMContentLoaded', () => {
     async function populateTagFilter() {
         await ensureAllPostsLoaded(); // 모든 게시물 데이터가 로드되었는지 확인
         // 모든 게시물에서 고유한 태그들을 추출하고 정렬합니다. (빈 값은 제외)
+        // 첫 번째 필터 (부산물 1) 채우기
         const uniqueTags = [...new Set(allAvailablePosts.map(p => p.tag).filter(Boolean))].sort();
-        // '부산물' 옵션을 기본으로 설정
         tagFilterSelect.innerHTML = '<option value="all">부산물</option>';
-        // 각 고유 태그에 대한 옵션을 드롭다운에 추가합니다.
         uniqueTags.forEach(tag => {
-            tagFilterSelect.innerHTML += `<option value="${tag}">${tag}</option>`;
+        tagFilterSelect.innerHTML += `<option value="${tag}">${tag}</option>`;
         });
-        const uniqueTags2 = [...new Set(allAvailablePosts.map(p => p.tag2).filter(Boolean))].sort();
-        tagFilter2.innerHTML = '<option value="all">일기</option>';
-        uniqueTags2.forEach(tag => {
+
+    // 두 번째 필터 (부산물 2 / 일기) 채우기
+    // DB2 시트에서 가져온 tag2 값들을 추출합니다.
+    const uniqueTags2 = [...new Set(allAvailablePosts.map(p => p.tag2).filter(Boolean))].sort();
+    tagFilter2.innerHTML = '<option value="all">일기</option>'; // 기본 문구
+    uniqueTags2.forEach(tag => {
         tagFilter2.innerHTML += `<option value="${tag}">${tag}</option>`;
     });
     }
