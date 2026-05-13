@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tagFilterSelect.innerHTML += `<option value="${tag}">${tag}</option>`;
         });
         const uniqueTags2 = [...new Set(allAvailablePosts.map(p => p.tag2).filter(Boolean))].sort();
-        tagFilter2.innerHTML = '<option value="all">부산물 2</option>';
+        tagFilter2.innerHTML = '<option value="all">일기</option>';
         uniqueTags2.forEach(tag => {
         tagFilter2.innerHTML += `<option value="${tag}">${tag}</option>`;
     });
