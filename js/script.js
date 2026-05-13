@@ -9,7 +9,8 @@ import { setupPostInteractions, createPostElement, highlightActivePost, setIniti
 // DOMContentLoaded 이벤트: HTML 문서가 완전히 로드되고 파싱되면 실행됩니다.
 document.addEventListener('DOMContentLoaded', () => {
     // HTML 요소들을 JavaScript 변수에 연결합니다.
-    const tagFilterSelect = document.getElementById('tag-filter'); // 태그 필터 드롭다운
+    const tagFilterSelect = document.getElementById('tag-filter-1'); // 태그 필터 드롭다운
+    const tagFilter2 = document.getElementById('tag-filter-2');
     const postList = document.getElementById('post-list'); // 게시물 목록 (ul)
     const loadMoreBtn = document.getElementById('load-more-btn'); // '더보기' 버튼
     const searchInput = document.getElementById('search-input'); // 검색 입력 필드
@@ -139,7 +140,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 post.tag && post.tag.toLowerCase() === currentTag.toLowerCase()
             );
         }
-
+        const val2 = tagFilter2.value;
+        if (val2 && val2.toLowerCase() !== 'all') {
+        posts = posts.filter(post => 
+            post.tag2 && post.tag2.toLowerCase() === val2.toLowerCase()
+        );
+    }   
         // 검색어 필터 적용
         if (currentSearchQuery !== '') {
             const searchQueryLower = currentSearchQuery.toLowerCase();
@@ -243,6 +249,11 @@ document.addEventListener('DOMContentLoaded', () => {
         uniqueTags.forEach(tag => {
             tagFilterSelect.innerHTML += `<option value="${tag}">${tag}</option>`;
         });
+        const uniqueTags2 = [...new Set(allAvailablePosts.map(p => p.tag2).filter(Boolean))].sort();
+        tagFilter2.innerHTML = '<option value="all">부산물 2</option>';
+        uniqueTags2.forEach(tag => {
+        tagFilter2.innerHTML += `<option value="${tag}">${tag}</option>`;
+    });
     }
 
     // 'ABOUT' 링크 컨테이너 클릭 시 iframe src 변경
