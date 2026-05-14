@@ -229,6 +229,7 @@ align-items:center;
     height: auto;
     text-overflow: ellipsis; /* 내용이 넘칠 때 ... 표시 */
     overflow: hidden; /* 내용 숨김 */
+    white-space: pre-wrap;
 }
 
 /* 고정된 게시물 */
