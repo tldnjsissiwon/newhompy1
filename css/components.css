@@ -149,8 +149,8 @@ align-items:center;
 /* 게시물 항목 호버 시 */
 #post-list li:hover {
     background: linear-gradient(to bottom, 
-     rgba(var(--color-primary-rgb), 1), 
-     rgba(var(--color-primary-rgb), 0)); /* 그라데이션 배경 */
+     rgba(200, 230, 255, 1), 
+     rgba(200, 230, 255, 0)); /* 그라데이션 배경 */
 }
 
 /* 활성화된 게시물 항목 */
